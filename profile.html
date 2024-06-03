@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Profile</title>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h2>Profile Page</h2>
+            <button onclick="logOut()" style="float:right" class="btn btn-danger">Logout</button>
+            <hr>
+            <h3>Welcome</h3>
+            <h4>Name: <span id="user-name"></span></h4>
+            <h6>Your Email is: <span id="user-email"></span></h6>
+        </div>
+    </div>
+</body>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const name = localStorage.getItem("name");
+        const email = localStorage.getItem("email");
+
+        if (name && email) {
+            document.getElementById("user-name").textContent = name;
+            document.getElementById("user-email").textContent = email;
+        } else {
+            alert("No user logged in");
+            window.location.href = "login.html";
+        }
+    });
+
+    function logOut() {
+        localStorage.removeItem("name");
+        localStorage.removeItem("email");
+        window.location.href = "login.html";
+    }
+</script>
+</html>

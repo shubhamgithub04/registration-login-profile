@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Registration</title>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h2>Registration Form</h2>
+            <form action="#">
+                <div class="form-group">
+                    <label for="first_name">First Name</label>
+                    <input type="text" class="form-control" id="first_name" name="firstname" placeholder="Enter your first name">
+                </div>
+                <div class="form-group">
+                    <label for="last_name">Last Name</label>
+                    <input type="text" class="form-control" id="last_name" name="lastname" placeholder="Enter your last name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" id="email" name="email" placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label for="contact">Contact</label>
+                    <input type="number" class="form-control" id="contact" name="contact" placeholder="Enter your contact number">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password">
+                </div>
+                <div class="text-center">
+                    <button type="button" onclick="saveData()" class="btn btn-primary" id="save_btn">Submit</button>
+                    <button type="reset"  class="btn btn-warning" id="">Reset</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+<script>
+    function saveData() {
+        let first_name = document.getElementById("first_name").value;
+        let last_name = document.getElementById("last_name").value;
+        let email = document.getElementById("email").value;
+        let contact = document.getElementById("contact").value;
+        let password = document.getElementById("password").value;
+
+        console.log(first_name + " " + last_name + " " + email + " " + contact + " " + password);
+
+        let user_records = JSON.parse(localStorage.getItem("users")) || [];
+
+        if (user_records.some(v => v.email === email)) {
+            alert("Duplicate Data");
+        } else {
+            user_records.push({
+                first_name: first_name,
+                last_name: last_name,
+                email: email,
+                contact: contact,
+                password: password
+            });
+            localStorage.setItem("users", JSON.stringify(user_records));
+            alert("Registration successful!");
+        }
+    }
+</script>
+</html>
